@@ -1,0 +1,32 @@
+Products
+________
+
+"619ea0e241b8f7410a44600c", "hyabak", 0
+"619ea0e241b8f7410a44600b", "isdin", 1
+"619ea0e241b8f7410a44600f", "piz buin", 10
+"619ea0e241b8f7410a44600e", "xhekpon", 100
+"619ea0e241b8f7410a44600d", "cerave", 8
+"619ea0e241b8f7410a446010", "la justicia", 14
+
+###
+GET http://localhost:3030/product
+###
+
+GET http://localhost:3030/cart
+
+###
+
+// hyabak
+// isdin
+// xhekpon
+
+POST http://localhost:3030/cart
+content-type: application/json
+
+{
+  "products": [
+    {"product": "619ea0e241b8f7410a44600c", "amount": 1},
+    {"product": "619ea0e241b8f7410a44600b", "amount": 1},
+    {"product": "619ea0e241b8f7410a44600e", "amount": 3}
+  ]
+}

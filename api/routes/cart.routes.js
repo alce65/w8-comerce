@@ -4,7 +4,8 @@ const router = express.Router();
 
 const {
   getAllCarts,
-  createOne,
+  createOneCart,
+  makeBuyOperation,
   getOneById,
   updateOneById,
   deleteOneById,
@@ -12,7 +13,8 @@ const {
 
 // router.get('/', ....)
 
-router.route('/').get(getAllCarts).post(createOne);
+router.route('/').get(getAllCarts).post(createOneCart);
+router.route('/buy').post(makeBuyOperation);
 router.route('/:id').get(getOneById).patch(updateOneById).delete(deleteOneById);
 
 module.exports = router;

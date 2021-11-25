@@ -8,6 +8,7 @@ async function mongoConnect() {
 
   const uri = `mongodb+srv://${user}:${passwd}@cluster0.dj9ya.mongodb.net/${databaseName}?retryWrites=true&w=majority`;
 
+  console.log(uri);
   const mongooseConnect = await mongoose.connect(uri);
   return mongooseConnect;
 }

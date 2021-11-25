@@ -1,5 +1,6 @@
 const express = require('express');
 const morgan = require('morgan');
+const cors = require('cors');
 require('dotenv').config();
 const productRouter = require('./routes/product.routes');
 const cartRouter = require('./routes/cart.routes');
@@ -13,6 +14,7 @@ mongoConnect();
 
 app.use(express.json());
 app.use(morgan('dev'));
+app.use(cors());
 
 app.use('/product', productRouter);
 app.use('/cart', cartRouter);
