@@ -33,7 +33,11 @@ export function payProducts(cart) {
   return async (dispatch) => {
     try {
       const url = 'http://localhost:3030';
-      const { data: products } = await axios.post(`${url}/cart/buy`, cart);
+      const token = JSON.parse(localStorage.getItem('user')).token;
+
+      const { data: products } = await axios.post(`${url}/cart/buy`, cart, {
+        headers: { Authorization: `Bearer ${token}` },
+      });
       dispatch({ type: actionTypes.PAY_PRODUCTS, products });
     } catch (error) {
       dispatch({ type: actionTypes.FAILED_PAY_PRODUCTS, error });
