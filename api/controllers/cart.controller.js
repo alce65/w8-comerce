@@ -1,7 +1,7 @@
 /* eslint-disable comma-dangle */
 const Cart = require('../models/cart.model');
 const { getAll } = require('./product.controller');
-// const Product = require('../models/product.model');
+const Product = require('../models/product.model');
 
 async function getAllCarts({ query }, res) {
   console.log('getAllCarts', query);
@@ -80,6 +80,35 @@ async function makeBuyOperation(req, res) {
 //   // const userCart = await Cart.create(validProducts);
 //   await res.json(userCart);
 // }
+
+async function createOneCart({ body }, res) {
+  // const validProducts = [];
+  // const userCart = await Cart.create([]);
+  const userCart = new Cart();
+
+  // await
+  for (let i = 0; i < body.products.length; i++) {
+    const item = body.products[i];
+    const isStockAvailable = await Product.findOneAndUpdate(
+      {
+        _id: item.product,
+        stock: { $gte: item.amount },
+      },
+      {
+        $inc: { stock: -item.amount },
+      }
+    );
+    console.log({ isStockAvailable });
+    if (isStockAvailable) {
+      // validProducts.push(current);
+      userCart.products.push(item);
+      await userCart.save();
+    }
+  }
+
+  // const userCart = await Cart.create(validProducts);
+  await res.json(userCart);
+}
 
 async function getOneById() {
   //
